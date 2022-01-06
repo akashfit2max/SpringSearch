@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,10 +11,24 @@
 <body style="background: #e2e2e2">
 	<div class="container mt-5 bg-light">
 		<form class="py-5" action="processForm" method="post">
+			<h1 class="text-center">Complex form</h1>
+
+
+
+			<!-- 			to show errors -->
+
+			<div class="alert alert-danger" role="alert">
+
+				<form:errors path="student.*" />
+			</div>
+
+
+
+
 			<div class="form-group row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="name" placeholder="Email">
+					<input type="text" class="form-control" name="name" placeholder="Name">
 				</div>
 			</div>
 
@@ -68,6 +83,8 @@
 					</div>
 				</div>
 			</fieldset>
+
+			<!-- to show class inside another class -->
 
 			<div class="card">
 				<div class="card-body">

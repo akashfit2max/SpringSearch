@@ -1,7 +1,9 @@
 package springsearch;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,6 +11,15 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class SearchController {
+
+//	uri hainding using pathvariable
+
+	@RequestMapping("user/{userId}/{userName}")
+	public String getUserDetails(@PathVariable("userId") int userId, @PathVariable("userName") String userName) {
+		System.out.println("name = " + userName);
+		System.out.println("id = " + userId);
+		return "home";
+	}
 
 	@RequestMapping("/home")
 	public String home() {
@@ -31,7 +42,12 @@ public class SearchController {
 	}
 
 	@RequestMapping(path = "/processForm", method = RequestMethod.POST)
-	public String formHandler(@ModelAttribute("student") Student student) {
+	public String formHandler(@ModelAttribute("student") Student student, BindingResult result) {
+
+		if (result.hasErrors()) {
+			return "complexform";
+		}
+
 		System.out.println(student);
 		System.out.println(student.getAddress());
 		return "success";
