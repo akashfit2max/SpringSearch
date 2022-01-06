@@ -2,6 +2,7 @@ package springsearch;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,12 @@ public class SearchController {
 
 	@RequestMapping("/home")
 	public String home() {
+//		processing form area
+//	making an exception
+
 		System.out.println("this is home view....");
+		String s = null;
+		System.out.println(s.length());
 		return "home";
 	}
 
@@ -51,5 +57,10 @@ public class SearchController {
 		System.out.println(student);
 		System.out.println(student.getAddress());
 		return "success";
+	}
+
+	@ExceptionHandler({NullPointerException.class})
+	public String exceptionHandler() {
+		return "error_page";
 	}
 }
