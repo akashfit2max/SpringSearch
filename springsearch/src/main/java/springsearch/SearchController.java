@@ -1,5 +1,6 @@
 package springsearch;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -23,7 +25,7 @@ public class SearchController {
 
 //		for number format exception
 
-		Integer.parseInt(userName);
+//		Integer.parseInt(userName);
 
 		return "home";
 	}
@@ -34,8 +36,8 @@ public class SearchController {
 //	making an exception
 
 		System.out.println("this is home view....");
-		String s = null;
-		System.out.println(s.length());
+//		String s = null;
+//		System.out.println(s.length());
 		return "home";
 	}
 
@@ -48,34 +50,29 @@ public class SearchController {
 		return redirectView;
 	}
 
-	@RequestMapping("/form")
-	public String complexform() {
-		return "complexform";
-	}
-
-	@RequestMapping(path = "/processForm", method = RequestMethod.POST)
-	public String formHandler(@ModelAttribute("student") Student student, BindingResult result) {
-
-		if (result.hasErrors()) {
-			return "complexform";
-		}
-
-		System.out.println(student);
-		System.out.println(student.getAddress());
-		return "success";
-	}
-
 //	handling exception in spring mvc
 
+	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler({ NullPointerException.class })
 	public String exceptionHandler(Model model) {
 		model.addAttribute("msg", "Null pointer exception has occured");
 		return "error_page";
 	}
 
+	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler({ NumberFormatException.class })
 	public String exceptionHandlerNumberFormat(Model model) {
 		model.addAttribute("msg", "Number format exception has occured");
 		return "error_page";
 	}
+
+//	generic exception handling
+
+	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+	@ExceptionHandler({ Exception.class })
+	public String exceptionHandlerGeneric(Model model) {
+		model.addAttribute("msg", "exception has occured");
+		return "error_page";
+	}
+
 }
