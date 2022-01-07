@@ -1,22 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="WEB-INF/css/style.css">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/style.css">
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 </head>
 <body>
-	<div class="container">
+	<div class="container mt-4">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="error-template">
 					<h1>Oops!</h1>
-					<h2>404 Not Found</h2>
+					<h2>${msg }</h2>
 					<div class="error-details">Sorry, an error has occured, Requested page not found!</div>
 					<div class="error-actions">
 						<a href="http://www.jquery2dotnet.com" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>

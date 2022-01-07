@@ -1,6 +1,7 @@
 package springsearch;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,6 +20,11 @@ public class SearchController {
 	public String getUserDetails(@PathVariable("userId") int userId, @PathVariable("userName") String userName) {
 		System.out.println("name = " + userName);
 		System.out.println("id = " + userId);
+
+//		for number format exception
+
+		Integer.parseInt(userName);
+
 		return "home";
 	}
 
@@ -59,8 +65,17 @@ public class SearchController {
 		return "success";
 	}
 
-	@ExceptionHandler({NullPointerException.class})
-	public String exceptionHandler() {
+//	handling exception in spring mvc
+
+	@ExceptionHandler({ NullPointerException.class })
+	public String exceptionHandler(Model model) {
+		model.addAttribute("msg", "Null pointer exception has occured");
+		return "error_page";
+	}
+
+	@ExceptionHandler({ NumberFormatException.class })
+	public String exceptionHandlerNumberFormat(Model model) {
+		model.addAttribute("msg", "Number format exception has occured");
 		return "error_page";
 	}
 }
