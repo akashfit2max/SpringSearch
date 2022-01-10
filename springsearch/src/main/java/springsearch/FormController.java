@@ -11,6 +11,8 @@ public class FormController {
 
 	@RequestMapping("/form")
 	public String complexform() {
+		String a = null;
+		System.out.println(a.length());
 		return "complexform";
 	}
 
